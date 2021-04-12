@@ -1,0 +1,16 @@
+def kryptering(n):
+    alfabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Æ','Ø','Å']
+    len(alfabet)
+
+    ord = 'HEJ'
+    L = len(ord)
+    L = n
+    plads = alfabet[0:]
+    key = 2
+
+    i=0
+    while i<n:
+        plads += key
+        alfabet(plads)
+        key + plads('H') % len(alfabet)
+        #str (output+=alfabet(key+plads('H')))
