@@ -1,16 +1,48 @@
-def kryptering(n):
+def kryptering(ord,key):
+    # Vi indsætter alfabetet som en liste, som vi leder i senere koden.
     alfabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Æ','Ø','Å']
-    len(alfabet)
 
-    ord = 'HEJ'
-    L = len(ord)
-    L = n
-    plads = alfabet[0:]
-    key = 2
+    # n er længden på det input, vi indsætter som skal krypteres.
+    n = len(ord)
 
+    # Vores output er en tom string, som der bliver skrevet i senere
+    output=""
+
+    #Tælleren i er 0, så den starter fra første bogstav.
     i=0
     while i<n:
-        plads += key
-        alfabet(plads)
-        key + plads('H') % len(alfabet)
-        #str (output+=alfabet(key+plads('H')))
+        #Så længe i er større end n, så finder vi pladsen/ indexet for hvert bogstav i det ord, vi skriver ind som skal krypteres.
+        ukrypteretIndex = alfabet.index(ord[i].upper())
+        krytperetIndex = (ukrypteretIndex + key) % len(alfabet)
+
+        output += alfabet[krytperetIndex]
+        i+=1
+    return output
+
+#Her indsættes det ord, som skal krypteres og en key-længde.
+print(kryptering('hello',8))
+
+def dekryptering(ord,key):
+    #Vi indsætter alfabetet som en liste, som vi leder i senere koden.
+    alfabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Æ','Ø','Å']
+
+    #n er længden på det input, vi indsætter som skal dekrypteres.
+    n = len(ord)
+
+    #Vores output er en tom string, som der bliver skrevet i senere
+    output = ""
+
+    #Tælleren i er 0, så den starter fra start.
+    i = 0
+    while i<n:
+        #Så længe i er større end n, så finder vi pladsen/ indexet for hvert bogstav i det ord, vi skriver ind som skal dekrypteres.
+        ukrypteretIndex = alfabet.index(ord[i].upper())
+        
+        krytperetIndex = (ukrypteretIndex + key) % len(alfabet)
+
+        output += alfabet[krytperetIndex]
+        i+=1
+    return output
+
+#Her indsættes det krypterede ord og en key-længde, som er i minus fordi vi dekrypterer nu.
+print(dekryptering('pmttw',-8))
