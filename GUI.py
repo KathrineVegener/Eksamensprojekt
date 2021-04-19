@@ -48,9 +48,42 @@ class Client:
         self.input_omraade.pack(padx=20, pady=5)
 
         self.send_knap = tk.Button(self.vin, text="Send", command=self.skriv)
+        self.send_knap.config(font=("Arial", 12))
+        self.send_knap.pack(padx=20, pady=5)
+
+        self.gui_done = True
+
+        self.vin.protocol("WM_DELETE_WINDOW", self.stop)
+
+        self.vin.mainloop()
 
     def skriv(self):
-        pass
+        besked = f"{self.kaldenavn}: {self.input_omraade.get('1.0', 'end')}"
+        self.sock.send(besked.encode("utf-8"))
+        self.input_omraade.delete('1.0', 'end')
+
+    def stop(self):
+        self.levende = False
+        self.vin.destroy()
+        self.sock.close()
+        exit(0)
 
     def modtag(self):
-        pass
+        while self.levende:
+            try:
+                besked = self.sock.recv(1024)
+                if besked == "NICK":
+                    self.sock.send(self.kaldenavn.encode("utf-8"))
+                elif self.gui_done:
+                    self.tekst_omraade.config(state="normal")
+                    self.tekst_omraade.insert("end", besked)
+                    self.tekst_omraade.yview("end")
+                    self.tekst_omraade.config(state="disabled")
+            except ConnectionAbortedError:
+                break
+            except:
+                print("Fejl")
+                self.sock.close()
+                break
+
+client = Client(HOST, PORT)
