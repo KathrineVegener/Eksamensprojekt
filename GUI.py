@@ -4,9 +4,11 @@ import tkinter as tk
 import tkinter.scrolledtext
 from tkinter import simpledialog
 
-HOST = "127.0.0.1"
-PORT = 9090
-
+#HOST = "127.0.0.1"
+#PORT = 9090
+FindHstename = socket.gethostname() #finder hostname
+HOST = socket.gethostbyname(FindHstename) #find ip'en
+PORT = 65432 #port den lytter på (skal være over 1024)
 
 class Client:
     def __init__(self, host, port):
