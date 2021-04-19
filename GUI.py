@@ -71,7 +71,7 @@ class Client:
     def modtag(self):
         while self.levende:
             try:
-                besked = self.sock.recv(1024)
+                besked = self.sock.recv(1024).decode("utf-8")
                 if besked == "NICK":
                     self.sock.send(self.kaldenavn.encode("utf-8"))
                 elif self.gui_done:
