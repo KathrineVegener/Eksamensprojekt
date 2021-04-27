@@ -31,20 +31,21 @@ def service_connection(key, mask):
     if mask & selectors.EVENT_WRITE:
         if data.outb:
             print("echoing", repr(data.outb), "to", data.addr)
-            sent = sock.send(data.outb)  # Should be ready to write
-            data.outb = data.outb[sent:]
+#            sent = sock.send(data.outb)  # Should be ready to write
+#            data.outb = data.outb[sent:]
+            return data.outb
 
 
 
 
 FindHstename = socket.gethostname() #finder hostname
 host = socket.gethostbyname(FindHstename) #find ip'en
-port = 65432 #port den lytter på (skal være over 1024)
+port = 55000 #port den lytter på (skal være over 1024)
 
 lsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 lsock.bind((host, port))
 lsock.listen()
-print("listening on", (host, port))
+print("lytter på", (host, port))
 lsock.setblocking(False)
 sel.register(lsock, selectors.EVENT_READ, data=None)
 
@@ -55,7 +56,11 @@ try:
             if key.data is None:
                 accept_wrapper(key.fileobj)
             else:
-                service_connection(key, mask)
+#                service_connection(key, mask)
+                Senderdata = service_connection(key, mask)
+                for key, mask in events:
+                    sock = key.fileobj
+                    sock.send(Senderdata)
 except KeyboardInterrupt:
     print("caught keyboard interrupt, exiting")
 finally:

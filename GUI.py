@@ -8,7 +8,7 @@ from tkinter import simpledialog
 #PORT = 9090
 FindHstename = socket.gethostname() #finder hostname
 HOST = socket.gethostbyname(FindHstename) #find ip'en
-PORT = 65432 #port den lytter på (skal være over 1024)
+PORT = 55000 #port den lytter på (skal være over 1024)
 
 class Client:
     def __init__(self, host, port):
@@ -16,7 +16,7 @@ class Client:
         self.sock.connect((host, port))
 
         bsk = tk.Tk()
-        bsk.withdraw
+        bsk.withdraw()
 
         self.kaldenavn = simpledialog.askstring("Kaldenavn", "Vælg dit kaldenavn", parent=bsk)
 
@@ -74,6 +74,7 @@ class Client:
         while self.levende:
             try:
                 besked = self.sock.recv(1024).decode("utf-8")
+                print(besked)
                 if besked == "NICK":
                     self.sock.send(self.kaldenavn.encode("utf-8"))
                 elif self.gui_done:
