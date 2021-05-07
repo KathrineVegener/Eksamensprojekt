@@ -8,7 +8,7 @@ from tkinter import simpledialog
 #PORT = 9090
 FindHstename = socket.gethostname() #finder hostname
 HOST = socket.gethostbyname(FindHstename) #find ip'en
-PORT = 55000 #port den lytter på (skal være over 1024)
+PORT = 65432 #port den lytter på (skal være over 1024)
 
 class Client:
     def __init__(self, host, port):
