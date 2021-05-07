@@ -75,7 +75,7 @@ class Client:
             try:
                 besked = self.sock.recv(1024).decode("utf-8")
                 print(besked)
-                if besked == "NICK":
+                if besked == "KALDENAVN":
                     self.sock.send(self.kaldenavn.encode("utf-8"))
                 elif self.gui_done:
                     self.tekst_omraade.config(state="normal")
