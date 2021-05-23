@@ -8,8 +8,7 @@ Port = 65432 #port den lytter på (skal være over 1024)
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((Host, Port))
 
-server.listen()
-
+server.listen()#bruger sockets lytte funktion til at lytte efter aktivitet på host og port
 Clienter = []
 Kaldenavne = []
 
