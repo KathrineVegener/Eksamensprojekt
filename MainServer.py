@@ -1,9 +1,8 @@
 import socket
-test = socket.gethostname()#find hosten
-test2 = socket.gethostbyname(test) #find ip'en
-HOST = test2  # Standard loopback interface address (localhost)
+
+HOST = '192.168.43.34'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
-print(test2) #print ip'en
+
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
